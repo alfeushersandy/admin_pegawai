@@ -47,4 +47,10 @@ class karyawan extends Model
         $d = $today->diff($birthDate)->d;
         return $y." tahun ".$m." bulan ".$d." hari";
     }
+
+    public function karyawan_keluar() {
+        return $this->hasOne(karyawan_keluar::class);
+    }
+
+    
 }

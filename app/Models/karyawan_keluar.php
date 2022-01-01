@@ -9,8 +9,11 @@ class karyawan_keluar extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'Id_karyawan',
+        'karyawans_id',
         'tanggal_keluar',
         'alasan'
     ];
+    public function karyawan() {
+        return $this->belongsTo(karyawan::class, 'karyawans_id');
+    }
 }

@@ -15,10 +15,11 @@ class CreateKaryawanKeluarsTable extends Migration
     {
         Schema::create('karyawan_keluars', function (Blueprint $table) {
             $table->id();
-            $table->integer('Id_karyawan');
+            $table->unsignedBigInteger('karyawans_id');
             $table->date('tanggal_keluar');
             $table->string('alasan');
             $table->timestamps();
+            $table->foreign('karyawans_id')->on('karyawans')->references('id');
         });
     }
 

@@ -94,7 +94,7 @@ class KaryawanController extends Controller
             
 
         ]);
-        return redirect('/karyawan')
+        return redirect('/karyawan/aktif')
             ->with('success', 'Data berhasil di tambahkan');
         }catch (\Exception $e){
             return redirect()->back()
@@ -175,7 +175,7 @@ class KaryawanController extends Controller
         $karyawan->Berkas = $request->file('berkas')->store('berkas');}
         $karyawan->save();
 
-        return redirect('/karyawan')
+        return redirect('/karyawan/aktif')
             ->with('success', 'Data berhasil di ubah');
         }catch (\Exception $e){
             return redirect()->back()
@@ -229,17 +229,23 @@ class KaryawanController extends Controller
     public function keluarkan(request $request, $id) 
     {
         
-        
+        try{
             $karyawan = karyawan::find($id);
             $karyawan->is_active = false;
             $karyawan->save();
 
             karyawan_keluar::create([
-                'Id_karyawan' => $request->id,
+                'karyawans_id' => $request->id,
                 'tanggal_keluar' => $request->tanggal_keluar,
                 'alasan' => $request->alasan
             ]);
-            return redirect('/karyawan');
+
+            return redirect('/karyawan/aktif')
+            ->with('success', 'data karyawan berhasil dikeluarkan');
+            }catch (\Exception $e){
+            return redirect()->back()
+                ->with('error', 'data karyawan gagal dikeluarkan');
+        }
             
 
 
@@ -248,6 +254,9 @@ class KaryawanController extends Controller
         
     }
     public function karyawan_keluar() {
-        return view('karyawan.index');
+        return view('karyawan.listkeluar', [
+            'karyawan' => karyawan_keluar::all(),
+            'tittle' => 'karyawan keluar'
+        ]);
     }
 }

@@ -25,6 +25,26 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Data Karyawan Keluar
                     </a>
+
+                    <div class="sb-sidenav-menu-heading">Menu SOP</div>
+                    <a class="nav-link {{ ($tittle == "list SOP") ? 'active' : '' }}" href="/sop">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        list SOP
+                    </a>
+                    <a class="nav-link {{ ($tittle == "Upload SOP") ? 'active' : '' }}" href="/sop/upload">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Upload SOP
+                    </a>
+
+                    <div class="sb-sidenav-menu-heading">Menu Surat Keputusan</div>
+                    <a class="nav-link {{ ($tittle == "list SK") ? 'active' : '' }}" href="/surat_keputusan">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        list Surat Keputusan
+                    </a>
+                    <a class="nav-link {{ ($tittle == "upload SK") ? 'active' : '' }}" href="/surat_keputusan/upload">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Upload Surat Keputusan
+                    </a>
                     {{-- <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
