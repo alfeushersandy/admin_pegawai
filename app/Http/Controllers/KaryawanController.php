@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DateTime;
 use App\Models\karyawan;
 use App\Models\karyawan_keluar;
 use Illuminate\Http\Request;
@@ -203,12 +203,22 @@ class KaryawanController extends Controller
     {
         $karyawan = karyawan::find($id);
         $masa = new karyawan;
+        
+        if($karyawan->is_active == true){
         return view('karyawan.detail', [
             'tittle' => 'Detail Karyawan',
             'karyawan' => $karyawan,
-            'usia' => $masa->hitung_umur($karyawan->Tanggal_lahir),
-            'masa_kerja' => $masa->hitung_umur($karyawan->Tanggal_masuk)
-        ]);
+            'usia' => $masa->hitung_umur($karyawan->Tanggal_lahir, "today"),
+            'masa_kerja' => $masa->hitung_umur($karyawan->Tanggal_masuk, "today")
+        ]);}
+        else{
+            return view('karyawan.detail', [
+                'tittle' => 'Detail Karyawan',
+                'karyawan' => $karyawan,
+                'usia' => $masa->hitung_umur($karyawan->Tanggal_lahir, "today"),
+                'masa_kerja' => $masa->hitung_umur($karyawan->Tanggal_masuk, $karyawan->karyawan_keluar->tanggal_keluar)
+            ]);
+        }
     }
 
     public function tampil_pdf ($id) {

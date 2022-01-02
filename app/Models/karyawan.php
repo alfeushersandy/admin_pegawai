@@ -35,10 +35,11 @@ class karyawan extends Model
                             'Berkas'
                             ];
 
-    public function hitung_umur($lahir){
+    public function hitung_umur($awal, $akhir){
     
-        $birthDate = new DateTime($lahir);
-        $today = new DateTime("today");
+        
+        $birthDate = new DateTime($awal);
+        $today = new DateTime($akhir);
         if ($birthDate > $today) { 
             exit("0 tahun 0 bulan 0 hari");
         }
@@ -49,7 +50,7 @@ class karyawan extends Model
     }
 
     public function karyawan_keluar() {
-        return $this->hasOne(karyawan_keluar::class);
+        return $this->hasOne(karyawan_keluar::class, 'karyawans_id');
     }
 
     
