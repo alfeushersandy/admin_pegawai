@@ -10,7 +10,7 @@ class sop extends Model
     use HasFactory;
     protected $fillable = [
         'Nama_berkas',
-        'keterangan',
+        'keterangan_berkas',
         'uploaded_file'
     ];
 }
