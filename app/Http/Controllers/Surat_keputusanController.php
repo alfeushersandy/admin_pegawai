@@ -3,31 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\sop;
-class SopController extends Controller
+use App\Models\surat_keputusan;
+
+class Surat_keputusanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view('sop.index',[
-            'tittle' => 'list SOP',
-            'sop' => sop::all()
+        return view('surat_keputusan.index',[
+            'tittle' => 'list Surat Keputusan',
+            'sk' => surat_keputusan::all()
         ]);
     }
 
-    /**
+     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        return view('sop.upload',[
-            'tittle' => 'upload SOP',
+        return view('surat_keputusan.upload',[
+            'tittle' => 'upload SK',
             
         ]);
     }
@@ -42,18 +38,18 @@ class SopController extends Controller
     {
         $this->validate($request, [
             'nama_berkas' => 'required',
-            'file_sop' => 'required|file|mimes:pdf',
+            'file_sk' => 'required|file|mimes:pdf',
             'keterangan' => 'required'
         ]);
 
 	    
 
-            sop::create([
+            surat_keputusan::create([
                 'Nama_berkas' => $request->nama_berkas,
                 'keterangan_berkas' => $request->keterangan,
-                'uploaded_file' => $request->file('file_sop')->store('file_sop')
+                'uploaded_file' => $request->file('file_sk')->store('file_sk')
             ]);
-            return redirect('/sop')
+            return redirect('/surat_keputusan')
                 ->with('success', 'Data berhasil di tambahkan');
             
         
@@ -105,10 +101,11 @@ class SopController extends Controller
         //
     }
 
-    public function tampil_pdf ($id) {
-        $sop = sop::find($id);
-        $pathtofile = 'storage/'.$sop->uploaded_file;
-        return response()->file($pathtofile);
+    public function tampil_pdf ($uploaded_file) {
+        $sop = surat_keputusan::where($uploaded_file)->get();
+        ddd($sop);
+        // $pathtofile = 'storage/'.$sop->uploaded_file;
+        // return response()->file($pathtofile);
 
     }
 }

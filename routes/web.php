@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KaryawankeluarController;
 use App\Http\Controllers\KaryawanKeluarController as ControllersKaryawanKeluarController;
 use App\Http\Controllers\SopController;
+use App\Http\Controllers\Surat_keputusanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,11 @@ Route::get('/sop',[SopController::class, 'index']);
 Route::get('/sop/upload',[SopController::class, 'create']);
 Route::post('/sop/store', [SopController::class, 'store']);
 Route::get('/sop/tampil/{uploaded_file}', [SopController::class, 'tampil_pdf']);
+
+Route::get('/surat_keputusan',[Surat_keputusanController::class, 'index']);
+Route::get('/surat_keputusan/upload',[Surat_keputusanController::class, 'create']);
+Route::post('/surat_keputusan/store', [Surat_keputusanController::class, 'store']);
+Route::get('/surat_keputusan/tampil/{uploaded_file}', [Surat_keputusanController::class, 'tampil_pdf']);
 
 Auth::routes(['verify' => true]);
 
