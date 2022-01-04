@@ -101,11 +101,10 @@ class Surat_keputusanController extends Controller
         //
     }
 
-    public function tampil_pdf ($uploaded_file) {
-        $sop = surat_keputusan::where($uploaded_file)->get();
-        ddd($sop);
-        // $pathtofile = 'storage/'.$sop->uploaded_file;
-        // return response()->file($pathtofile);
+    public function tampil_pdf ($id) {
+        $sop = Surat_keputusan::find($id);
+        $pathtofile = 'storage/'.$sop->uploaded_file;
+        return response()->file($pathtofile);
 
     }
 }

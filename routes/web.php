@@ -2,13 +2,14 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SopController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Karyawan3bulanController;
 use App\Http\Controllers\KaryawankeluarController;
-use App\Http\Controllers\KaryawanKeluarController as ControllersKaryawanKeluarController;
-use App\Http\Controllers\SopController;
 use App\Http\Controllers\Surat_keputusanController;
+use App\Http\Controllers\KaryawanKeluarController as ControllersKaryawanKeluarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +53,8 @@ Route::get('/surat_keputusan',[Surat_keputusanController::class, 'index']);
 Route::get('/surat_keputusan/upload',[Surat_keputusanController::class, 'create']);
 Route::post('/surat_keputusan/store', [Surat_keputusanController::class, 'store']);
 Route::get('/surat_keputusan/tampil/{uploaded_file}', [Surat_keputusanController::class, 'tampil_pdf']);
+
+Route::get('/karyawan/3_bulan', [Karyawan3bulanController::class, 'index']);
 
 Auth::routes(['verify' => true]);
 

@@ -19,7 +19,7 @@
                 <tbody>
                 @foreach ($sk as $sk)
                     <tr>
-                        <td><a href="/surat_keputusan/tampil/{{ $sk->uploaded_file }}" target="blank">{{ $sk->Nama_berkas }}</a></td>
+                        <td><a href="/surat_keputusan/tampil/{{ $sk->id }}" target="blank">{{ $sk->Nama_berkas }}</a></td>
                         <td>{{ $sk->keterangan_berkas }}</td>
                         <td>{{ $sk->created_at }}</td>
                     </tr>
