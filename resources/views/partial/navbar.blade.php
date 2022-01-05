@@ -25,6 +25,10 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Data Karyawan Keluar
                     </a>
+                    <a class="nav-link {{ ($tittle == "Karyawan 3 Bulanan") ? 'active' : '' }}" href="/karyawan/3_bulan">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Karyawan 3 Bulan
+                    </a>
 
                     <div class="sb-sidenav-menu-heading">Menu SOP</div>
                     <a class="nav-link {{ ($tittle == "list SOP") ? 'active' : '' }}" href="/sop">

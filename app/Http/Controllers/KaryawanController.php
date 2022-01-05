@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use DateTime;
+
 use App\Models\karyawan;
 use App\Models\karyawan_keluar;
 use Illuminate\Http\Request;
@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class KaryawanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -144,7 +148,7 @@ class KaryawanController extends Controller
     public function update(Request $request, $id)
     {
         
-        try{
+        
 
         $karyawan = karyawan::find($id);
         
@@ -177,10 +181,7 @@ class KaryawanController extends Controller
 
         return redirect('/karyawan/aktif')
             ->with('success', 'Data berhasil di ubah');
-        }catch (\Exception $e){
-            return redirect()->back()
-                ->with('error', 'Data gagal diubah');
-        }
+        
     }
 
     /**
@@ -203,15 +204,14 @@ class KaryawanController extends Controller
     {
         $karyawan = karyawan::find($id);
         $masa = new karyawan;
-        
         if($karyawan->is_active == true){
-        return view('karyawan.detail', [
-            'tittle' => 'Detail Karyawan',
-            'karyawan' => $karyawan,
-            'usia' => $masa->hitung_umur($karyawan->Tanggal_lahir, "today"),
-            'masa_kerja' => $masa->hitung_umur($karyawan->Tanggal_masuk, "today")
-        ]);}
-        else{
+            return view('karyawan.detail', [
+                'tittle' => 'Detail Karyawan',
+                'karyawan' => $karyawan,
+                'usia' => $masa->hitung_umur($karyawan->Tanggal_lahir, "today"),
+                'masa_kerja' => $masa->hitung_umur($karyawan->Tanggal_masuk, "today")
+            ]);
+        }else{
             return view('karyawan.detail', [
                 'tittle' => 'Detail Karyawan',
                 'karyawan' => $karyawan,
@@ -219,6 +219,7 @@ class KaryawanController extends Controller
                 'masa_kerja' => $masa->hitung_umur($karyawan->Tanggal_masuk, $karyawan->karyawan_keluar->tanggal_keluar)
             ]);
         }
+        
     }
 
     public function tampil_pdf ($id) {
@@ -260,12 +261,11 @@ class KaryawanController extends Controller
 
 
 
-
         
     }
     public function karyawan_keluar() {
         return view('karyawan.listkeluar', [
-            'karyawan' => karyawan_keluar::latest()->get(),
+            'karyawan' => karyawan_keluar::all(),
             'tittle' => 'karyawan keluar'
         ]);
     }

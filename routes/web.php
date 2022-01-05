@@ -57,5 +57,4 @@ Route::get('/surat_keputusan/tampil/{uploaded_file}', [Surat_keputusanController
 Route::get('/karyawan/3_bulan', [Karyawan3bulanController::class, 'index']);
 
 Auth::routes(['verify' => true]);
-
 Route::get('/home', [HomeController::class, 'index'])->name('home');

@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Tabel Karyawan</h1>
+    <h1 class="mt-4">List Surat Keputusan</h1>
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
