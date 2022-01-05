@@ -119,3 +119,64 @@
 
     
 @endsection
+@section('script')
+<script>
+    // / Bar Chart Example
+var ctx = document.getElementById("myBarChart");
+
+var myLineChart = new Chart(ctx, {
+type: "bar",
+data: {
+labels: [
+    "Direktur Utama",
+    "Direktur",
+    "General Manager",
+    "Manager",
+    "Supervisor",
+    "Staff",
+    "operasional",
+],
+datasets: [
+    {
+        label: "Jumlah Orang",
+        backgroundColor: "rgba(2,117,216,1)",
+        borderColor: "rgba(2,117,216,1)",
+        data: [ JSON.parse(`{{ $Direktur_Utama }}`), JSON.parse(`{{ $Direktur }}`), JSON.parse(`{{ $General_Manager }}`),JSON.parse(`{{ $Manager }}`), JSON.parse(`{{ $Supervisor }}`), JSON.parse(`{{ $Staff }}`), JSON.parse(`{{ $Operasional }}`)],
+    },
+],
+},
+options: {
+scales: {
+    xAxes: [
+        {
+            time: {
+                unit: "month",
+            },
+            gridLines: {
+                display: true,
+            },
+            ticks: {
+                maxTicksLimit: 7,
+            },
+        },
+    ],
+    yAxes: [
+        {
+            ticks: {
+                min: 0,
+                max: 122,
+                maxTicksLimit: 7,
+            },
+            gridLines: {
+                display: true,
+            },
+        },
+    ],
+},
+legend: {
+    display: false,
+},
+},
+});
+</script>
+@endsection
