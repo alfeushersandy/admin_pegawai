@@ -5,11 +5,11 @@ namespace App\Models;
 use DateTime;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 
 class karyawan extends Model
 {
     use HasFactory;
-    protected $table = 'tb_karyawan';
     protected $fillable = [
                             'Nama',
                             'NIK',
@@ -48,6 +48,16 @@ class karyawan extends Model
         $m = $today->diff($birthDate)->m;
         $d = $today->diff($birthDate)->d;
         return $y." tahun ".$m." bulan ".$d." hari";
+    }
+
+    public static function jumlah_karyawan($jabatan)
+    {
+        $karyawan = DB::table('karyawans')
+                    ->where('is_active', true)
+                    ->where('Jabatan', $jabatan)
+                    ->count();
+
+        return json_encode($karyawan);
     }
 
     public function karyawan_keluar() {

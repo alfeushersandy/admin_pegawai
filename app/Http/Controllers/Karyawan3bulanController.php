@@ -16,7 +16,7 @@ class Karyawan3bulanController extends Controller
     }
     public function index() 
     {
-        $karyawan = DB::table('tb_karyawan')->where('is_active', true)
+        $karyawan = DB::table('karyawans')->where('is_active', true)
                                        ->whereRaw('DATEDIFF(CURDATE(), Tanggal_masuk) >= 90')
                                        ->whereRaw('DATEDIFF(CURDATE(), Tanggal_masuk) <= 120')->get();
         
