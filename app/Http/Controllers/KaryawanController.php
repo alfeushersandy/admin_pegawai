@@ -265,7 +265,7 @@ class KaryawanController extends Controller
     }
     public function karyawan_keluar() {
         return view('karyawan.listkeluar', [
-            'karyawan' => karyawan_keluar::all(),
+            'karyawan' => karyawan_keluar::orderBy('Tanggal_Keluar','DESC')->get(),
             'tittle' => 'karyawan keluar'
         ]);
     }

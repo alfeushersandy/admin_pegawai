@@ -14,6 +14,7 @@ class DashboardController extends Controller
     
     public function index () 
     {
+         
         $Manager = karyawan::jumlah_karyawan('Manager');
         $operasional = karyawan::jumlah_karyawan('Operasional');
         $staf = karyawan::jumlah_karyawan('Staff');
@@ -30,6 +31,9 @@ class DashboardController extends Controller
             'Supervisor' => $supervisor,
             'Direktur' => $direktur,
             'Direktur_Utama' => $direktur_utama,
+            'total_karyawan' => karyawan::all()->count(),
+            'karyawan_aktif' => karyawan::where('is_active', true)->count(),
+            'karyawan_tidak_aktif' => karyawan::where('is_active', false)->count()
         ]);
     }
     public function about() 

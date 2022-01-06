@@ -4,14 +4,16 @@
     <!-- Begin Page Content -->
     <div class="container">
 
-        <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Tabel Karyawan Keluar</h1>
-
         <!-- DataTales Example -->
-        <div class="card shadow mb-4">
+        <div class="container-fluid px-4">
+        <h1 class="mt-2">Tabel Karyawan Keluar</h1>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                DataTable Karyawan
+            </div>
             <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <table id="datatablesSimple">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -33,8 +35,8 @@
                                     <td>{{ $kar->karyawan->NIK }}</td>
                                     <td>{{ $kar->karyawan->Jabatan }}</td>
                                     <td>{{ $kar->karyawan->Departemen }}</td>
-                                    <td>{{ $kar->tanggal_keluar }}</td>
-                                    <td>{{ $kar->alasan }}</td>
+                                    <td>{{ $kar->Tanggal_Keluar }}</td>
+                                    <td>{{ $kar->Alasan }}</td>
                                     <td><a href="">edit</a></td>
                                     
                                 </tr>

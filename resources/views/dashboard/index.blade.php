@@ -20,7 +20,7 @@
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                     Total Karyawan</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $total_karyawan }}</div>
                                 </div>
                                 <div class="col-auto">
                                     <i class="fas fa-briefcase fa-2x text-gray-300"></i>
@@ -38,7 +38,7 @@
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                         Karyawan Aktif</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $karyawan_aktif }}</div>
                                 </div>
                                 <div class="col-auto">
                                     <i class="fas fa-user-tie fa-2x text-gray-300"></i>
@@ -56,7 +56,7 @@
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                         Karyawan Tidak Aktif</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $karyawan_tidak_aktif }}</div>
                                 </div>
                                 <div class="col-auto">
                                     <i class="fas fa-user-times fa-2x text-gray-300"></i>
@@ -164,7 +164,7 @@ scales: {
         {
             ticks: {
                 min: 0,
-                max: 122,
+                max: 100,
                 maxTicksLimit: 7,
             },
             gridLines: {
