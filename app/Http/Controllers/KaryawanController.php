@@ -5,14 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\karyawan;
 use App\Models\karyawan_keluar;
 use Illuminate\Http\Request;
+use Illuminate\Support\File;
 
 
 class KaryawanController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth', 'verified']);
-    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -51,6 +49,14 @@ class KaryawanController extends Controller
      */
     public function store(Request $request)
     {
+        $foto = "";
+        $berkas = "";
+        if($request->file('foto')){
+            $foto = $request->file('foto')->store('foto_diri');
+        }
+        if($request->file('berkas')){
+            $berkas = $request->file('berkas')->store('berkas');
+        }
         // $this->validate($request, [
         //     'Nama' => 'required',
         //     'NIK' => 'required',
@@ -66,9 +72,9 @@ class KaryawanController extends Controller
         //     'jenjang_pendidikan' => 'required',
         //     'alamat' => 'required',
         //     'foto' => 'image|file|',
-        //     'berkas' => 'mimes:pdf|max:10000',
+        //     'berkas' => 'mimes:pdf|max:10000|',
         // ]);
-        try{
+        
         karyawan::create([
             'Nama' => $request->nama,
             'NIK' => $request->nik,
@@ -91,8 +97,8 @@ class KaryawanController extends Controller
             'Email' => $request->email,
             'Agama' => $request->agama,
             'is_active' => true,
-            'Foto' => $request->file('foto')->store('foto_diri'),
-            'Berkas' => $request->file('berkas')->store('berkas')
+            'Foto' => $foto,
+            'Berkas' => $berkas
 
 
             
@@ -100,10 +106,7 @@ class KaryawanController extends Controller
         ]);
         return redirect('/karyawan/aktif')
             ->with('success', 'Data berhasil di tambahkan');
-        }catch (\Exception $e){
-            return redirect()->back()
-                ->with('error', 'Data gagal tambahkan');
-        }
+        
     
 
     }

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class karyawan extends Model
 {
     use HasFactory;
-    protected $table = 'tb_karyawan';
+    // protected $table = 'tb_karyawan';
     protected $fillable = [
                             'Nama',
                             'NIK',

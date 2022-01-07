@@ -22,11 +22,11 @@
             <tbody>
             @foreach ($data_karyawan as $karyawan)
                 <tr>
-                    <td><a href="/karyawan/detail/{{ $karyawan->id }}">{{ $karyawan->Nama }}</a></td>
+                    <td><a href="/karyawan/detail/{{ $karyawan->ID }}">{{ $karyawan->Nama }}</a></td>
                     <td>{{ $karyawan->NIK }}</td>
                     <td>{{ $karyawan->Jabatan }}</td>
                     <td>{{ $karyawan->Departemen }}</td>
-                    <td><a href="/karyawan/keluar/{{ $karyawan->id }}">keluar</a></td>
+                    <td><a href="/karyawan/keluar/{{ $karyawan->ID }}">keluar</a></td>
                 </tr>
             @endforeach
             </tbody>
