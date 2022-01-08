@@ -127,7 +127,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror</div>
-                        <div class="col-md-12"><label class="labels">Berkas</label><img src="{{ asset('storage/' . $karyawan->Berkas) }}" style="width:95px" class="mt-2 mb-2 ml-1"><input type="file" class="form-control @error('berkas') is-invalid @enderror"  name="berkas">
+                        <div class="col-md-12"><label class="labels">Berkas</label><input type="file" class="form-control @error('berkas') is-invalid @enderror"  name="berkas">
                             @error('berkas')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

@@ -42,6 +42,7 @@ Route::get('karyawan/keluar/{id}', [KaryawanController::class, 'keluar']);
 Route::post('karyawan/confirmkeluar/{id}', [KaryawanController::class, 'keluarkan']);
 
 Route::get('/keluar', [KaryawanController::class, 'karyawan_keluar']);
+Route::get('/keluar/{id}', [KaryawanController::class, 'edit_karyawan_keluar']);
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
 Route::get('/sop',[SopController::class, 'index']);

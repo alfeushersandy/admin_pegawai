@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\karyawan;
 use App\Models\karyawan_keluar;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 
@@ -51,23 +52,30 @@ class KaryawanController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->validate($request, [
-        //     'Nama' => 'required',
-        //     'NIK' => 'required',
-        //     'status_Karyawan' => 'required',
-        //     'status_perkawinan' => 'required',
-        //     'tanggal_masuk' => 'required',
-        //     'tanggal_lahir' => 'required',
-        //     'tempat_lahir' => 'required',
-        //     'departemen' => 'required',
-        //     'jabatan' => 'required',
-        //     'tugas_jabatan' => 'required',
-        //     'jenjang_pendidikan' => 'required',
-        //     'jenjang_pendidikan' => 'required',
-        //     'alamat' => 'required',
-        //     'foto' => 'image|file|',
-        //     'berkas' => 'mimes:pdf|max:10000',
-        // ]);
+        
+        $foto = "";
+        $berkas = "";
+        if($request->file('foto')){
+            $foto = $request->file('foto')->store('foto_diri');
+        }
+        if($request->file('berkas')){
+            $berkas = $request->file('berkas')->store('berkas');
+        }
+        $this->validate($request, [
+            'Nama' => 'required',
+            'NIK' => 'required',
+            'status_Karyawan' => 'required',
+            'status_perkawinan' => 'required',
+            'tanggal_masuk' => 'required',
+            'tanggal_lahir' => 'required',
+            'tempat_lahir' => 'required',
+            'departemen' => 'required',
+            'jabatan' => 'required',
+            'tugas_jabatan' => 'required',
+            'alamat' => 'required',
+            'foto' => 'image|file',
+            'berkas' => 'mimes:pdf|max:10000',
+        ]);
         try{
         karyawan::create([
             'Nama' => $request->nama,
@@ -91,8 +99,8 @@ class KaryawanController extends Controller
             'Email' => $request->email,
             'Agama' => $request->agama,
             'is_active' => true,
-            'Foto' => $request->file('foto')->store('foto_diri'),
-            'Berkas' => $request->file('berkas')->store('berkas')
+            'Foto' => $foto,
+            'Berkas' => $berkas
 
 
             
@@ -174,8 +182,12 @@ class KaryawanController extends Controller
         $karyawan->Agama = $request->agama;
         $karyawan->is_active = true;
         if($request->file('foto'))
-         { $karyawan->Foto = $request->file('foto')->store('foto_diri');}
+         { 
+            Storage::delete($karyawan->Foto);
+            $karyawan->Foto = $request->file('foto')->store('foto_diri');
+            }
         if($request->file('berkas')) {
+            Storage::delete($karyawan->Berkas);
         $karyawan->Berkas = $request->file('berkas')->store('berkas');}
         $karyawan->save();
 
@@ -267,6 +279,13 @@ class KaryawanController extends Controller
         return view('karyawan.listkeluar', [
             'karyawan' => karyawan_keluar::all(),
             'tittle' => 'karyawan keluar'
+        ]);
+    }
+
+    public function edit_karyawan_keluar($id) {
+        return view('karyawan.edit_keluar', [
+            'karyawan' => karyawan_keluar::find($id),
+            'tittle' => 'edit karyawan keluar'
         ]);
     }
 }

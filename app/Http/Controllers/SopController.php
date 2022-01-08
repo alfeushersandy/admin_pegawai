@@ -31,6 +31,7 @@ class SopController extends Controller
      */
     public function create()
     {
+        $this->authorize('admin');
         return view('sop.upload',[
             'tittle' => 'upload SOP',
             

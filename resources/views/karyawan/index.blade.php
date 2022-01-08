@@ -26,7 +26,7 @@
                     <td>{{ $karyawan->NIK }}</td>
                     <td>{{ $karyawan->Jabatan }}</td>
                     <td>{{ $karyawan->Departemen }}</td>
-                    <td><a href="/karyawan/keluar/{{ $karyawan->id }}">keluar</a></td>
+                    <td><a  href="/karyawan/keluar/{{ $karyawan->id }}"><i class="fas fa-sign-out-alt "></i></a></td>
                 </tr>
             @endforeach
             </tbody>
