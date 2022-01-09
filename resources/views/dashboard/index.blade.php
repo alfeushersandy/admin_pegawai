@@ -164,11 +164,7 @@ scales: {
         {
             ticks: {
                 min: 0,
-<<<<<<< HEAD
                 max: 150,
-=======
-                max: 100,
->>>>>>> 5034cd0dfb505848fc8ad02233cff5a0ba0ee21d
                 maxTicksLimit: 7,
             },
             gridLines: {
@@ -181,21 +177,6 @@ legend: {
     display: false,
 },
 },
-});
-</script>
-<script>
-
-// Pie Chart Example
-var ctx = document.getElementById("myPieChart");
-var myPieChart = new Chart(ctx, {
-  type: 'pie',
-  data: {
-    labels: ["Blue", "Red", "Yellow", "Green", "purple", "enam"],
-    datasets: [{
-      data: [ JSON.parse(`{{ $Direktur_Utama }}`). JSON.parse(`{{ $Direktur_Utama }}`),  JSON.parse(`{{ $Direktur_Utama }}`). JSON.parse(`{{ $Direktur_Utama }}`),  JSON.parse(`{{ $Direktur_Utama }}`)],
-      backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745', '#28a745'],
-    }],
-  },
 });
 </script>
 

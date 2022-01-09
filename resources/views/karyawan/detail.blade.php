@@ -12,7 +12,7 @@
         <div class="card mb-3 ml-3" style="max-width: 1000px;">
             <div class="row no-gutters">
                 <div class="col-md-5">
-                    <img src="{{ asset('storage/' . $karyawan->Foto) }}"  style="width:350px; max-height:350px; overflow:hidden;" class="rounded-circle mt-3 ml-3">
+                    <img src="{{ asset('storage/' . $karyawan->Foto) }}"  style="width:350px; max-height:350px; overflow:hidden; margin-left:45px;" class="rounded-circle mt-3">
                 </div>
                 <div class="col-md-7">
                 <div class="card-body ml-3">

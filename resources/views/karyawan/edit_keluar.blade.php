@@ -7,7 +7,7 @@
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Form Karyawan Keluar</h1>
         <!-- Form input Karyawan -->
-            <form class="col-6" action="/karyawan/confirmkeluar/{{ $karyawan->id }}" method="post">
+            <form class="col-6" action="/keluar/confirmkeluar/{{ $karyawan->id }}" method="post">
                 @csrf
                 <input type="hidden" name="id" value="{{  $karyawan->karyawan->id  }}">
                 <div class="form-group">

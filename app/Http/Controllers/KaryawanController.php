@@ -11,6 +11,10 @@ use Illuminate\Support\File;
 
 class KaryawanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+    }
     
     /**
      * Display a listing of the resource.
@@ -285,4 +289,18 @@ class KaryawanController extends Controller
             'tittle' => 'edit karyawan keluar'
         ]);
     }
+    public function update_keluar(Request $request, $id){
+        
+        $keluar = karyawan_keluar::find($id);
+        $keluar->karyawans_id = $request->id;
+        $keluar->tanggal_keluar = $request->tanggal_keluar;
+        $keluar->alasan = $request->alasan; 
+        $keluar->save();
+
+        return redirect('/keluar')
+            ->with('success', 'Data berhasil di ubah');
+        
+    }
+
+    
 }

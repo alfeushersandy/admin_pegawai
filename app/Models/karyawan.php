@@ -53,7 +53,7 @@ class karyawan extends Model
 
     public static function jumlah_karyawan($jabatan)
     {
-        $karyawan = DB::table('tb_karyawan')
+        $karyawan = DB::table('karyawans')
                     ->where('is_active', true)
                     ->where('Jabatan', $jabatan)
                     ->count();
@@ -62,7 +62,7 @@ class karyawan extends Model
     }
 
     public function karyawan_keluar() {
-        return $this->hasOne(karyawan_keluar::class, 'Id_karyawan');
+        return $this->hasOne(karyawan_keluar::class, 'karyawans_id');
     }
 
     
