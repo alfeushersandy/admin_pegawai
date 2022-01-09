@@ -6,14 +6,12 @@ use App\Models\karyawan;
 use App\Models\karyawan_keluar;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\File;
 
 
 class KaryawanController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth', 'verified']);
-    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -61,22 +59,24 @@ class KaryawanController extends Controller
         if($request->file('berkas')){
             $berkas = $request->file('berkas')->store('berkas');
         }
-        $this->validate($request, [
-            'Nama' => 'required',
-            'NIK' => 'required',
-            'status_Karyawan' => 'required',
-            'status_perkawinan' => 'required',
-            'tanggal_masuk' => 'required',
-            'tanggal_lahir' => 'required',
-            'tempat_lahir' => 'required',
-            'departemen' => 'required',
-            'jabatan' => 'required',
-            'tugas_jabatan' => 'required',
-            'alamat' => 'required',
-            'foto' => 'image|file',
-            'berkas' => 'mimes:pdf|max:10000',
-        ]);
-        try{
+        // $this->validate($request, [
+        //     'Nama' => 'required',
+        //     'NIK' => 'required',
+        //     'status_Karyawan' => 'required',
+        //     'status_perkawinan' => 'required',
+        //     'tanggal_masuk' => 'required',
+        //     'tanggal_lahir' => 'required',
+        //     'tempat_lahir' => 'required',
+        //     'departemen' => 'required',
+        //     'jabatan' => 'required',
+        //     'tugas_jabatan' => 'required',
+        //     'jenjang_pendidikan' => 'required',
+        //     'jenjang_pendidikan' => 'required',
+        //     'alamat' => 'required',
+        //     'foto' => 'image|file|',
+        //     'berkas' => 'mimes:pdf|max:10000|',
+        // ]);
+        
         karyawan::create([
             'Nama' => $request->nama,
             'NIK' => $request->nik,
@@ -108,10 +108,7 @@ class KaryawanController extends Controller
         ]);
         return redirect('/karyawan/aktif')
             ->with('success', 'Data berhasil di tambahkan');
-        }catch (\Exception $e){
-            return redirect()->back()
-                ->with('error', 'Data gagal tambahkan');
-        }
+        
     
 
     }
@@ -277,7 +274,7 @@ class KaryawanController extends Controller
     }
     public function karyawan_keluar() {
         return view('karyawan.listkeluar', [
-            'karyawan' => karyawan_keluar::all(),
+            'karyawan' => karyawan_keluar::orderBy('Tanggal_Keluar','DESC')->get(),
             'tittle' => 'karyawan keluar'
         ]);
     }

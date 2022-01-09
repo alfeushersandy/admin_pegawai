@@ -9,7 +9,7 @@
         <!-- Form input Karyawan -->
             <form class="col-6" action="/karyawan/confirmkeluar/{{ $karyawan->id }}" method="post">
                 @csrf
-                <input type="hidden" name="id" value="{{  $karyawan->id  }}">
+                <input type="hidden" name="id" value="{{  $karyawan->karyawan->id  }}">
                 <div class="form-group">
                     <label for="Nama">Nama</label>
                     <input type="text" class="form-control" name="Nama" aria-describedby="emailHelp" required value="{{  $karyawan->karyawan->Nama  }}">

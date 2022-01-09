@@ -164,7 +164,11 @@ scales: {
         {
             ticks: {
                 min: 0,
+<<<<<<< HEAD
                 max: 150,
+=======
+                max: 100,
+>>>>>>> 5034cd0dfb505848fc8ad02233cff5a0ba0ee21d
                 maxTicksLimit: 7,
             },
             gridLines: {
