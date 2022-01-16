@@ -7,10 +7,10 @@ use App\Models\surat_keputusan;
 
 class Surat_keputusanController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth', 'verified']);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware(['auth', 'verified']);
+    // }
     public function index()
     {
         return view('surat_keputusan.index',[

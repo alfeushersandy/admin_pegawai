@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 class Karyawan3bulanController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth', 'verified']);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware(['auth', 'verified']);
+    // }
     public function index() 
     {
         $karyawan = DB::table('karyawans')->where('is_active', true)
