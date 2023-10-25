@@ -46,7 +46,7 @@
                 <a class="btn btn-danger mt-3 ml-2" href="/karyawan/tampils/{{ $karyawan->id }}" target="blank" role="button">Berkas</a>
                 </div>
                 <div>
-                    <p class="card-text mt-3" style="text-align:right">Last update <span></span></p>
+                    <p class="card-text mt-3" style="text-align:right">Last update : <span>{{ $karyawan->updated_at}}</span></p>
                 </div>
             </div>
         </div>

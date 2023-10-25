@@ -3,6 +3,7 @@
 @section('content')
 <div class="container-fluid px-4">
 <h1 class="mt-4">Tabel Karyawan</h1>
+<a href="/karyawan/export" class="btn btn-success my-3" target="_blank">EXPORT EXCEL</a>
 <div class="card mb-4">
     <div class="card-header">
         <i class="fas fa-table me-1"></i>
@@ -16,7 +17,10 @@
                     <th>NIK</th>
                     <th>Jabatan</th>
                     <th>Departemen</th>
+                    @can('is_Admin')
                     <th>Action</th>
+                    @endcan
+                    
                 </tr>
             </thead>
             <tbody>
@@ -26,9 +30,12 @@
                     <td>{{ $karyawan->NIK }}</td>
                     <td>{{ $karyawan->Jabatan }}</td>
                     <td>{{ $karyawan->Departemen }}</td>
-                    @if ($karyawan->is_active == true)
+                    @can('is_Admin')
+                        @if ($karyawan->is_active == true)
                         <td><a  href="/karyawan/keluar/{{ $karyawan->id }}"><i class="fas fa-sign-out-alt "></i></a></td>   
-                    @endif
+                        @endif
+                    @endcan
+                    
                     
                 </tr>
             @endforeach

@@ -31,6 +31,7 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><hr class="dropdown-divider" /></li>
                         <li>
+                            <a href="" class="btn btn-default btn-flat">Ubah Password</a>
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-default btn-flat">Logout</button>

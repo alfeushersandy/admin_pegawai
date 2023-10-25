@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\sop;
+use Illuminate\Support\Facades\Storage;
 class SopController extends Controller
 {
     
-    // public function __construct()
-    // {
-    //     $this->middleware(['auth', 'verified']);
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -74,7 +75,11 @@ class SopController extends Controller
      */
     public function show($id)
     {
-        //
+        $this->authorize('admin');
+        return view('sop.edit',[
+            'tittle' => 'list SOP',
+            'sop' => sop::find($id)
+        ]);
     }
 
     /**
@@ -97,7 +102,24 @@ class SopController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $sop = sop::find($id);
+
+        if($request->hasFile('file_sop')){
+            Storage::delete($sop->uploaded_file);
+            $sop->update([
+                'Nama_berkas' => $request->nama_berkas,
+                'keterangan_berkas' => $request->keterangan,
+                'uploaded_file' => $request->file('file_sop')->store('file_sop')
+            ]);
+        }else{
+            $sop->update([
+                'Nama_berkas' => $request->nama_berkas,
+                'keterangan_berkas' => $request->keterangan
+            ]);
+        }
+
+        return redirect('/sop')
+            ->with('success', 'Data berhasil di update');
     }
 
     /**
@@ -108,7 +130,10 @@ class SopController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->authorize('admin');
+        $sop = sop::find($id);
+        $sop->delete();
+        return redirect()->route('sop.index');
     }
 
     public function tampil_pdf ($id) {

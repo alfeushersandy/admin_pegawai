@@ -37,6 +37,40 @@
                                                     @enderror
                                                 </div>
                                             </div>
+                                            <div class="row mb-3">
+                                                <label for="exampleFormControlSelect1" class="col-md-4 col-form-label text-md-right">Departemen</label>
+
+                                                    <div class="col-md-6">
+                                                        <select class="form-control col-md-6" id="exampleFormControlSelect1" name="departemen">
+                                                        <option>Directorate</option>
+                                                        <option>Finance</option>
+                                                        <option>Accounting</option>
+                                                        <option>HRD & GA</option>
+                                                        <option>Legal & Permit</option>
+                                                        <option>Marketing</option>
+                                                        <option>Project</option>
+                                                        <option>PPIC</option>
+                                                        <option>Procurement</option>
+                                                        <option>Information Technology</option>
+                                                        <option>AMP & SC Magelang</option>
+                                                        <option>AMP & SC Bawen</option>
+                                                        <option>AMP Gombong</option>
+                                                        <option>AMP & SC Purworejo</option>
+                                                        <option>CMP Magelang</option>
+                                                        <option>CMP Bawen</option>
+                                                        <option>CMP Kaliwungu</option>
+                                                        <option>Technical</option>
+                                                        <option>Peralatan</option>
+                                                        <option>Precast & SC Tempuran</option>
+                                                        <option>Mining Kulon Progo</option>
+                                                        <option>Operasional</option>
+                                                        <option>PT ADITYA</option>
+                                                        <option>UNIT</option>
+                                                        <option>CKC</option>
+                                                        <option>CEO</option>
+                                                        </select>
+                                                    </div>
+                                        </div>
 
                                             <div class="row mb-3">
                                                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>

@@ -66,4 +66,6 @@ class karyawan extends Model
     }
 
     
+
+    
 }

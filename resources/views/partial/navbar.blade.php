@@ -3,6 +3,7 @@
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                 <div class="nav">
+                    @if(auth()->user()->level == 1 || auth()->user()->level == 2)
                     <div class="sb-sidenav-menu-heading">Core</div>
                     <a class="nav-link {{ ($tittle == "Dashboard") ? 'active' : '' }}" href="/dashboard">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
@@ -28,19 +29,32 @@
                     <a class="nav-link {{ ($tittle == "Karyawan 3 Bulanan") ? 'active' : '' }}" href="/karyawan/3_bulan">
                         <div class="sb-nav-link-icon"><i class="fas fa-user-tie"></i></div>
                         Karyawan 3 Bulan
-                    </a>
+                    </a> 
+                    @endif
 
                     <div class="sb-sidenav-menu-heading">Menu SOP</div>
                     <a class="nav-link {{ ($tittle == "list SOP") ? 'active' : '' }}" href="/sop">
                         <div class="sb-nav-link-icon"><i class="fas fa-file"></i></div>
                         list SOP
                     </a>
-                    @can('admin')
+                    @if(auth()->user()->level == 1)
                     <a class="nav-link {{ ($tittle == "Upload SOP") ? 'active' : '' }}" href="/sop/upload">
                         <div class="sb-nav-link-icon"><i class="fas fa-file"></i></div>
                         Upload SOP
                     </a>
-                    @endcan
+                    @endif
+
+                    <div class="sb-sidenav-menu-heading">Menu Form</div>
+                    <a class="nav-link {{ ($tittle == "list Form") ? 'active' : '' }}" href="/form">
+                        <div class="sb-nav-link-icon"><i class="fas fa-file"></i></div>
+                        list Form
+                    </a>
+                    @if(auth()->user()->level == 1)
+                    <a class="nav-link {{ ($tittle == "Upload Form") ? 'active' : '' }}" href="/form/upload">
+                        <div class="sb-nav-link-icon"><i class="fas fa-file"></i></div>
+                        Upload Form
+                    </a>
+                    @endif
                     
 
                     <div class="sb-sidenav-menu-heading">Menu Surat Keputusan</div>
@@ -48,53 +62,13 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-file"></i></div>
                         list Surat Keputusan
                     </a>
-                    @can('admin')
+                    @if(auth()->user()->level == 1)
                         <a class="nav-link {{ ($tittle == "upload SK") ? 'active' : '' }}" href="/surat_keputusan/upload">
                             <div class="sb-nav-link-icon"><i class="fas fa-file"></i></div>
                             Upload Surat Keputusan
                         </a>
-                    @endcan
+                    @endif
                    
-                    {{-- <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                Authentication
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="login.html">Login</a>
-                                    <a class="nav-link" href="register.html">Register</a>
-                                    <a class="nav-link" href="password.html">Forgot Password</a>
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                Error
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="401.html">401 Page</a>
-                                    <a class="nav-link" href="404.html">404 Page</a>
-                                    <a class="nav-link" href="500.html">500 Page</a>
-                                </nav>
-                            </div>
-                        </nav>
-                    </div>
-                    <div class="sb-sidenav-menu-heading">Addons</div>
-                    <a class="nav-link" href="charts.html">
-                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                        Charts
-                    </a>
-                    <a class="nav-link" href="tables.html">
-                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                        Tables
-                    </a>
-                </div>
-            </div> --}}
-            {{-- <div class="sb-sidenav-footer">
-                <div class="small">Logged in as:</div>
-                Start Bootstrap
-            </div> --}}
+                    
         </nav>
     </div>

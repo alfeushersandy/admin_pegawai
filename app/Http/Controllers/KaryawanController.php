@@ -4,17 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\karyawan;
 use App\Models\karyawan_keluar;
+use App\Exports\KaryawanExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\File;
 
 
 class KaryawanController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware(['auth', 'verified']);
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     
     /**
      * Display a listing of the resource.
@@ -23,14 +26,23 @@ class KaryawanController extends Controller
      */
     public function index()
     {
+        $departemen = auth()->user()->departemen;
+        if(Gate::allows('is_Admin') || auth()->user()->level == 1){
+           $karyawan = karyawan::all();
+        }else if(auth()->user()->level == 2){
+            $karyawan = karyawan::where('Departemen' ,$departemen)->get();
+        }else{
+            abort(403);
+        }
         return view('karyawan.index', [
             'tittle' => 'Halaman Karyawan',
-            'data_karyawan' => karyawan::all()
+            'data_karyawan' => $karyawan
         ]);
     }
 
     public function input()
     {
+        $this->authorize('admin');
         return view('karyawan.insert', [
             'tittle' => 'Halaman Input Data'
         ]);
@@ -125,10 +137,15 @@ class KaryawanController extends Controller
      */
     public function show()
     {
+        $departemen = auth()->user()->departemen;
+        if(Gate::allows('is_Admin')){
+           $karyawan = karyawan::where('is_active', 1)->latest('NIK')->get();
+        }else{
+            $karyawan = karyawan::where('Departemen' ,$departemen)->where('is_active', true)->get();
+        }
         return view('karyawan.index', [
             'tittle' => 'Karyawan Aktif',
-            'data_karyawan' => karyawan::where('is_active', 1)
-                    ->latest('NIK')->get()
+            'data_karyawan' => $karyawan
         ]);
     }
 
@@ -243,6 +260,7 @@ class KaryawanController extends Controller
     }
 
     public function keluar($id) {
+        $this->authorize('is_Admin');
         $karyawan = karyawan::find($id);
         return view('karyawan.keluar', [
             'tittle' => 'Form karyawan keluar',
@@ -252,6 +270,7 @@ class KaryawanController extends Controller
 
     public function keluarkan(request $request, $id) 
     {
+        $this->authorize('is_Admin');
         
         try{
             $karyawan = karyawan::find($id);
@@ -284,13 +303,14 @@ class KaryawanController extends Controller
     }
 
     public function edit_karyawan_keluar($id) {
+        $this->authorize('is_Admin');
         return view('karyawan.edit_keluar', [
             'karyawan' => karyawan_keluar::find($id),
             'tittle' => 'edit karyawan keluar'
         ]);
     }
     public function update_keluar(Request $request, $id){
-        
+        $this->authorize('is_Admin');
         $keluar = karyawan_keluar::find($id);
         $keluar->karyawans_id = $request->id;
         $keluar->tanggal_keluar = $request->tanggal_keluar;
@@ -301,6 +321,12 @@ class KaryawanController extends Controller
             ->with('success', 'Data berhasil di ubah');
         
     }
+
+    public function export_excel()
+	{
+        $this->authorize('is_Admin');
+		return Excel::download(new KaryawanExport, 'karyawan.csv');
+	}
 
     
 }

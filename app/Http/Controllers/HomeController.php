@@ -11,10 +11,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    // public function __construct()
-    // {
-    //     $this->middleware(['auth', 'verified']);
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     /**
      * Show the application dashboard.
@@ -23,6 +23,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard.index');
+        if(auth()->user()->level == 1 || auth()->user()->level == 2){
+            return view('dashboard.index');
+        }else{
+            return redirect()->route('sop.index');
+        }
     }
 }

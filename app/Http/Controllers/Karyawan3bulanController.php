@@ -10,18 +10,22 @@ use Illuminate\Support\Facades\DB;
 
 class Karyawan3bulanController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware(['auth', 'verified']);
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index() 
     {
-        $karyawan = DB::table('karyawans')->where('is_active', true)
-                                       ->whereRaw('DATEDIFF(CURDATE(), Tanggal_masuk) >= 90')
-                                       ->whereRaw('DATEDIFF(CURDATE(), Tanggal_masuk) <= 120')->get();
-        return view('karyawan.index', [
-            'tittle' => 'karyawan 3 bulanan',
-            'data_karyawan' => $karyawan
-        ]);
+        if(auth()->user()->level == 1){
+            $karyawan = DB::table('karyawans')->where('is_active', true)
+                                           ->whereRaw('DATEDIFF(CURDATE(), Tanggal_masuk) >= 90')
+                                           ->whereRaw('DATEDIFF(CURDATE(), Tanggal_masuk) <= 120')->get();
+            return view('karyawan.index', [
+                'tittle' => 'karyawan 3 bulanan',
+                'data_karyawan' => $karyawan
+            ]);
+        }else{
+            abort(403);
+        }
     }
 }
